@@ -1,0 +1,1831 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MiniLab X — The Playground for Curious Minds</title>
+<meta name="description" content="Free, easy science experiments for kids using everyday kitchen items. Predict, try it, and learn why. Family profiles, progress tracking and printable sheets.">
+<meta name="theme-color" content="#6a3df0">
+<!-- After you publish: add <link rel="canonical" href="https://YOUR-SITE/"> and a real og:image below -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mini Science Lab">
+<meta property="og:title" content="Mini Science Lab: Fun Science Experiments for Kids at Home">
+<meta property="og:description" content="Easy kitchen science experiments with predictions, step-by-step guides and printable sheets.">
+<!-- <meta property="og:image" content="https://YOUR-SITE/og-image.png"> -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mini Science Lab">
+<meta name="twitter:description" content="Easy kitchen science experiments for kids. Predict, try, learn.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a3df0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 3h6M10 3v6l-5.5 9.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7.5 15h9'/%3E%3C/svg%3E">
+
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:light-dark(#fffaf0,#14181f);
+  --surface:light-dark(#ffffff,#1d232d);
+  --surface2:light-dark(#fff1d6,#262d3a);
+  --text:light-dark(#2a2438,#f4f1fa);
+  --muted:light-dark(#645c75,#bdb6cc);
+  --accent:light-dark(#6a3df0,#a58bff);
+  --accent-ink:light-dark(#fff,#1a1233);
+  --orange:light-dark(#f2790f,#ffb15c);
+  --good:light-dark(#1b8a4b,#6fe3a0);
+  --bad:light-dark(#b4382c,#ff9a8a);
+  --warn:light-dark(#8a5a00,#ffd27a);
+  --warnbg:light-dark(#fff3cf,#3a3118);
+  --border:light-dark(#eadfc6,#343c4c);
+  --shadow:0 12px 30px #2a24381a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:"Nunito",ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;
+}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:10px}
+.ic{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em;flex:none}
+.vh{position:absolute;opacity:0;width:1px;height:1px}
+
+.skip{position:absolute;left:12px;top:-60px;z-index:50;background:var(--accent);color:var(--accent-ink);padding:10px 14px;border-radius:10px;font-weight:800}
+.skip:focus{top:12px}
+.wrap{max-width:1080px;margin:auto;padding:0 20px 60px}
+
+/* HEADER */
+.top{
+  position:sticky;top:0;z-index:20;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.topin{max-width:1080px;margin:auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px;font-weight:900;font-size:1.25rem;letter-spacing:-.02em;text-decoration:none}
+.brand .ic{width:1.4em;height:1.4em;color:var(--accent)}
+.brand span{color:var(--accent)}
+.nav{display:flex;gap:2px}
+.nav a{padding:8px 11px;border-radius:999px;text-decoration:none;font-weight:700;color:var(--muted)}
+.nav a:hover{background:var(--surface2);color:var(--text)}
+.acctbar{display:flex;gap:8px;align-items:center}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:center;padding:44px 0 18px}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;background:var(--surface2);color:var(--accent);padding:7px 13px;border-radius:999px;font-weight:800;font-size:.85rem}
+.hero h1{font-size:clamp(2.3rem,6vw,4.2rem);line-height:1.02;letter-spacing:-.045em;margin:16px 0 14px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{color:var(--muted);font-size:1.12rem;max-width:560px;margin:0 0 18px}
+.ctas{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  border:0;border-radius:14px;background:var(--accent);color:var(--accent-ink);
+  padding:12px 18px;font-weight:900;text-decoration:none;transition:.15s;
+}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn:disabled{opacity:.7;cursor:default;transform:none;filter:none}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn.small{padding:8px 12px;border-radius:12px;font-size:.9rem}
+.btn.danger{background:var(--bad);color:#fff}
+.btn.ghost.dangerline{color:var(--bad);border-color:var(--bad)}
+.btn[hidden]{display:none}
+
+.heroart{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  background:linear-gradient(145deg,var(--surface2),var(--surface));
+  border:1px solid var(--border);border-radius:30px;padding:22px;box-shadow:var(--shadow);
+}
+.heroart .tile{width:100%;height:auto;aspect-ratio:1;border-radius:22px;animation:bob 5s ease-in-out infinite}
+.heroart .tile .ic{width:44%;height:44%}
+.heroart .tile:nth-child(2n){animation-delay:.8s}
+.heroart .tile:nth-child(3n){animation-delay:1.6s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* TILES */
+.tile{
+  --h:260;width:52px;height:52px;border-radius:16px;display:grid;place-items:center;flex:none;
+  background:light-dark(hsl(var(--h) 90% 92%),hsl(var(--h) 35% 24%));
+  color:light-dark(hsl(var(--h) 70% 36%),hsl(var(--h) 90% 76%));
+}
+.tile .ic{width:28px;height:28px}
+.tile.sm{width:32px;height:32px;border-radius:10px}
+.tile.sm .ic{width:18px;height:18px}
+.tile.md{width:44px;height:44px;border-radius:14px}
+.tile.md .ic{width:24px;height:24px}
+
+/* FEATURES */
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:26px 0}
+.feat{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:12px 14px;font-weight:800;font-size:.95rem}
+.feat .ic{width:1.5em;height:1.5em;color:var(--accent)}
+
+section{scroll-margin-top:84px;margin-top:46px}
+.shead h2{font-size:2rem;letter-spacing:-.035em;margin:0}
+.shead p{color:var(--muted);margin:4px 0 16px}
+
+/* DAILY */
+.daily{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  background:linear-gradient(120deg,var(--accent),color-mix(in srgb,var(--accent) 55%,var(--orange)));
+  color:var(--accent-ink);border-radius:26px;padding:22px 24px;box-shadow:var(--shadow);
+}
+.daily .tile{background:#ffffff30;color:inherit;width:62px;height:62px}
+.daily .tile .ic{width:34px;height:34px}
+.daily .txt{flex:1;min-width:220px}
+.daily .lbl{font-weight:900;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;opacity:.85;display:flex;gap:6px;align-items:center}
+.daily h3{margin:2px 0;font-size:1.5rem}
+.daily p{margin:0;opacity:.92}
+.daily .btn{background:var(--surface);color:var(--text)}
+
+/* RANK */
+.rank{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:14px 18px;margin-bottom:16px}
+.rank > .ic{width:2em;height:2em;color:var(--orange)}
+.rank .rtxt{flex:1;min-width:200px}
+.rank strong{font-size:1.05rem}
+.rank small{display:block;color:var(--muted);font-weight:700}
+.progress{height:10px;background:var(--border);border-radius:99px;overflow:hidden;margin-top:6px}
+.bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--orange));transition:width .35s}
+
+/* SEARCH + FILTERS */
+.search{position:relative;margin-bottom:12px}
+.search .ic{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);width:1.2em;height:1.2em}
+.search input{width:100%;padding:13px 14px 13px 44px;border:1px solid var(--border);border-radius:14px;background:var(--surface);color:var(--text);font:inherit}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.chip{border:1px solid var(--border);background:var(--surface);padding:7px 14px;border-radius:999px;font-weight:800}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.count{color:var(--muted);font-weight:700;font-size:.9rem;margin:0 0 14px}
+
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;transition:transform .2s}
+.card:hover{transform:translateY(-3px)}
+.card h3{margin:8px 0 0;font-size:1.2rem}
+.card p{margin:0;color:var(--muted);flex:1}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tag{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border-radius:999px;padding:3px 10px;font-size:.8rem;font-weight:800}
+.badge{position:absolute;top:16px;right:16px;display:inline-flex;align-items:center;gap:4px;background:var(--good);color:#fff;border-radius:999px;padding:3px 10px;font-size:.78rem;font-weight:900}
+.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:30px}
+.muted{color:var(--muted)}
+
+/* LOG */
+.logrow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:10px 14px;border:1px solid var(--border);border-radius:14px;background:var(--surface);margin-bottom:8px}
+.logrow:hover{border-color:var(--accent)}
+.logrow .grow{flex:1}
+.logrow small{display:block;color:var(--muted)}
+
+/* HOW + FAQ */
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.how{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:22px;box-shadow:var(--shadow)}
+.how .tile{margin-bottom:10px}
+.how h3{margin:0 0 4px}
+.how p{margin:0;color:var(--muted)}
+details{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:0 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:800;padding:15px 0;display:flex;justify-content:space-between;align-items:center;gap:10px;list-style:none}
+summary::-webkit-details-marker{display:none}
+details[open] > summary .ic{transform:rotate(180deg)}
+details p{margin:0 0 15px;color:var(--muted)}
+
+.footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--border);color:var(--muted);font-size:.92rem}
+.footer button{background:none;border:0;text-decoration:underline;color:var(--muted);padding:0}
+
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:11px 18px;border-radius:12px;font-weight:800;z-index:100;opacity:0;pointer-events:none;transition:.25s}
+.toast.show{opacity:1;transform:translateX(-50%)}
+
+/* DIALOGS */
+dialog{width:min(700px,94vw);max-height:90vh;padding:0;border:0;border-radius:26px;background:var(--surface);color:var(--text);box-shadow:0 30px 80px #0006}
+dialog.narrow{width:min(520px,94vw)}
+dialog.wide{width:min(900px,96vw)}
+dialog::backdrop{background:#1a123388;backdrop-filter:blur(3px)}
+.dhead{position:sticky;top:0;z-index:2;background:var(--surface);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:16px 22px;border-bottom:1px solid var(--border)}
+.dtitle{display:flex;align-items:center;gap:12px}
+.dtitle h2{margin:0;font-size:1.35rem}
+.dbtns{display:flex;gap:8px;align-items:center}
+.dstatus{font-weight:800;color:var(--good);font-size:.85rem}
+.dbody{padding:4px 22px 24px}
+.dbody h3{margin:22px 0 8px;font-size:1.05rem}
+.grownup{display:flex;gap:10px;align-items:flex-start;background:var(--warnbg);color:var(--warn);border-radius:14px;padding:12px 14px;font-weight:700;margin-top:16px}
+.grownup .ic{margin-top:3px}
+.check{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--border);border-radius:12px;background:var(--surface2);margin-bottom:8px;cursor:pointer}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent);flex:none}
+.check input:checked + span{text-decoration:line-through;color:var(--muted)}
+ol.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+ol.steps li{counter-increment:s}
+ol.steps .check span::before{content:counter(s) ". ";font-weight:900;color:var(--accent)}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;border:1px solid var(--border);background:var(--surface2);border-radius:12px;padding:11px 14px}
+.opt:hover{border-color:var(--accent)}
+.opt[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.why{background:var(--surface2);border-left:5px solid var(--good);border-radius:14px;padding:14px 16px;margin-top:14px}
+.why[hidden]{display:none}
+.why strong{color:var(--good)}
+.rankup{display:flex;gap:8px;align-items:center;margin-top:10px;font-weight:900;color:var(--orange)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+
+/* FORMS */
+.field{display:grid;gap:5px;margin-bottom:12px}
+.field > label,.lbl{font-weight:800;font-size:.92rem}
+.field small{color:var(--muted)}
+input[type=text],input[type=password],input[type=number],select,textarea{
+  width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:12px;
+  background:var(--surface2);color:var(--text);font:inherit;
+}
+textarea{min-height:90px;resize:vertical}
+.err{color:var(--bad);font-weight:800;min-height:1.4em;margin:6px 0}
+.note{color:var(--muted);font-size:.9rem;margin:8px 0}
+.agree{display:flex;gap:10px;align-items:flex-start;font-weight:700;margin:8px 0 12px}
+.agree input{width:18px;height:18px;margin-top:4px;accent-color:var(--accent);flex:none}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.picks{display:flex;flex-wrap:wrap;gap:8px}
+.pick{cursor:pointer;display:inline-block}
+.pick .tile,.pick .sw{outline:3px solid transparent;outline-offset:2px}
+.pick input:checked + .tile,.pick input:checked + .sw{outline-color:var(--accent)}
+.pick input:focus-visible + .tile,.pick input:focus-visible + .sw{outline-color:var(--text)}
+.sw{display:block;width:32px;height:32px;border-radius:50%}
+.optrow{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.optrow input[type=text]{flex:1}
+.corr{display:flex;gap:5px;align-items:center;font-weight:800;font-size:.85rem;white-space:nowrap}
+.corr input{accent-color:var(--accent)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row .grow,.grow{flex:1;min-width:140px}
+
+/* ACCOUNT + ADMIN */
+.who{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:14px 0}
+.whobtn{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px;border:1px solid var(--border);border-radius:16px;background:var(--surface2);font-weight:800}
+.whobtn:hover{border-color:var(--accent)}
+.whobtn[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
+.tabs{display:flex;gap:4px;padding:8px 22px 0;border-bottom:1px solid var(--border);overflow:auto}
+.tabbtn{display:inline-flex;gap:6px;align-items:center;border:0;background:transparent;padding:10px 14px;border-bottom:3px solid transparent;font-weight:800;color:var(--muted);white-space:nowrap}
+.tabbtn[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.kcard{border:1px solid var(--border);border-radius:18px;padding:14px 16px;margin-bottom:12px;background:var(--surface2)}
+.kcard .progress{background:var(--border)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip2{background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:3px 10px;font-size:.8rem;font-weight:700}
+.listrow{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--border);border-radius:14px;margin-bottom:8px;background:var(--surface2);flex-wrap:wrap}
+.listrow small{display:block;color:var(--muted)}
+.zone{border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-top:14px}
+.zone h3{margin-top:0!important}
+
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr}
+  .heroart{max-width:380px}
+  .features{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr 1fr}
+  .steps3{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .grid,.grid2{grid-template-columns:1fr}
+  .nav{display:none}
+  .features{grid-template-columns:1fr}
+  .optrow{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+@media print{
+  body>*:not(dialog){display:none!important}
+  dialog{position:static;width:auto;max-height:none;box-shadow:none;border:0;background:#fff;color:#000}
+  .dbtns,.actions{display:none!important}
+  .dhead{position:static}
+  .check{break-inside:avoid;background:#fff}
+}
+
+/* ===== ULTRA MODE — visual upgrade ===== */
+:root{
+  --bg:light-dark(#f7f5ff,#080a12);
+  --surface:light-dark(#ffffff,#111522);
+  --surface2:light-dark(#f0edff,#181d2d);
+  --text:light-dark(#17142b,#f7f6ff);
+  --muted:light-dark(#68627d,#aaa8c0);
+  --accent:light-dark(#7057ff,#8d7cff);
+  --accent-ink:light-dark(#fff,#0c0a18);
+  --orange:light-dark(#ff7b36,#ff9d5c);
+  --good:light-dark(#19a66a,#55e0a1);
+  --bad:light-dark(#d54858,#ff7f91);
+  --warn:light-dark(#a26a00,#ffd36a);
+  --warnbg:light-dark(#fff3ce,#2c2410);
+  --border:light-dark(#e4def7,#292e42);
+  --shadow:0 18px 55px #4b3bb21c;
+}
+body{background:var(--bg);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-3;pointer-events:none;background:
+ radial-gradient(circle at 10% 10%,#7b61ff20 0 12%,transparent 32%),
+ radial-gradient(circle at 90% 20%,#ff8a3d18 0 10%,transparent 30%),
+ radial-gradient(circle at 50% 100%,#2bd9a015 0 10%,transparent 35%);}
+body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.28;background-image:linear-gradient(#ffffff06 1px,transparent 1px),linear-gradient(90deg,#ffffff06 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,black,transparent 80%)}
+.top{background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid color-mix(in srgb,var(--accent) 22%,var(--border));box-shadow:0 8px 30px #0000000b}
+.topin{padding-top:12px;padding-bottom:12px}
+.brand{font-size:1.35rem;gap:9px}.brand .ic{filter:drop-shadow(0 0 9px color-mix(in srgb,var(--accent) 70%,transparent))}
+.nav a{transition:.2s}.nav a:hover{transform:translateY(-2px);box-shadow:0 8px 22px #00000010}
+.hero{min-height:570px;padding:76px 0 30px;position:relative}
+.hero::before{content:"SCIENCE • DISCOVER • CREATE";position:absolute;top:28px;left:0;font-size:.72rem;letter-spacing:.28em;font-weight:1000;color:var(--muted);opacity:.65}
+.eyebrow{box-shadow:0 0 0 1px #ffffff20 inset,0 10px 30px #6a3df018;animation:badgePulse 3s ease-in-out infinite}
+@keyframes badgePulse{50%{box-shadow:0 0 0 5px #7057ff10,0 0 30px #7057ff18}}
+.hero h1{font-size:clamp(3rem,7.4vw,6.2rem);text-wrap:balance;text-shadow:0 10px 40px #7057ff18}
+.hero h1 em{background:linear-gradient(100deg,var(--accent),var(--orange),var(--good));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% 100%;animation:gradientMove 5s ease infinite}
+@keyframes gradientMove{50%{background-position:100% 50%}}
+.hero p{font-size:1.18rem}
+.btn{border:1px solid #ffffff12;box-shadow:0 10px 25px #7057ff1c;transition:transform .2s,box-shadow .2s,filter .2s}
+.btn:hover{transform:translateY(-3px) scale(1.015);box-shadow:0 16px 34px #7057ff2b}
+.btn.ghost:hover{background:var(--surface2)}
+.heroart{position:relative;overflow:hidden;grid-template-columns:repeat(3,1fr);gap:14px;padding:25px;border-radius:34px;box-shadow:0 30px 90px #4c3cb229,0 0 0 1px #ffffff12 inset;transform:perspective(1000px) rotateY(-4deg) rotateX(2deg);transition:.5s}
+.heroart:hover{transform:perspective(1000px) rotateY(0) rotateX(0) translateY(-5px)}
+.heroart::before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:#fff5;filter:blur(35px);top:-90px;right:-70px;animation:orb 7s ease-in-out infinite}
+@keyframes orb{50%{transform:translate(-40px,90px)}}
+.heroart .tile{position:relative;z-index:1;box-shadow:0 15px 30px #00000012,0 0 0 1px #ffffff16 inset}
+.features{gap:14px;margin:30px 0}.feat{min-height:70px;box-shadow:var(--shadow);transition:.25s}.feat:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:0 20px 40px #7057ff16}
+.daily{position:relative;overflow:hidden;border:1px solid #ffffff22;box-shadow:0 25px 65px #7057ff25}.daily::after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-80px;top:-120px;background:#ffffff15;filter:blur(5px)}
+.rank{box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 20%,var(--border));position:relative;overflow:hidden}.rank::after{content:"";position:absolute;right:-60px;top:-80px;width:180px;height:180px;border-radius:50%;background:#7057ff12}
+.progress{height:12px}.bar{background:linear-gradient(90deg,var(--accent),var(--orange),var(--good));background-size:200% 100%;animation:barShimmer 3s linear infinite}
+@keyframes barShimmer{to{background-position:200% 0}}
+.search input{box-shadow:0 10px 35px #00000008;transition:.2s}.search input:focus{border-color:var(--accent);box-shadow:0 0 0 4px #7057ff18,0 18px 45px #0000000b}
+.chip{transition:.2s}.chip:hover{transform:translateY(-2px)}
+.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{overflow:hidden;padding:22px;border-color:color-mix(in srgb,var(--accent) 12%,var(--border));box-shadow:0 18px 45px #0000000b;transition:transform .28s,box-shadow .28s,border-color .28s}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--accent),var(--orange),var(--good));transform:scaleX(.2);transform-origin:left;transition:.3s}
+.card:hover{transform:translateY(-9px) rotateX(1deg);box-shadow:0 28px 60px #7057ff1c;border-color:#7057ff55}.card:hover::before{transform:scaleX(1)}
+.card .tile{transition:.3s}.card:hover .tile{transform:rotate(-5deg) scale(1.07);box-shadow:0 12px 25px #7057ff18}
+.badge{box-shadow:0 8px 20px #19a66a33}
+.logrow,.how,details{box-shadow:var(--shadow);transition:.2s}.logrow:hover,.how:hover,details:hover{transform:translateY(-2px);border-color:#7057ff55}
+.how{position:relative;overflow:hidden}.how::after{content:"";position:absolute;right:-35px;bottom:-45px;width:120px;height:120px;border-radius:50%;background:#7057ff0d}
+.dialog{} 
+dialog{border:1px solid #ffffff18;box-shadow:0 35px 100px #00000055}
+.toast{box-shadow:0 15px 40px #00000030;border:1px solid #ffffff16}
+@media(max-width:860px){.hero{min-height:auto;padding-top:65px}.heroart{transform:none}.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.hero h1{font-size:clamp(2.8rem,15vw,4.4rem)}.hero::before{display:none}.grid{grid-template-columns:1fr}.heroart{max-width:none}}
+@media(prefers-reduced-motion:reduce){.hero h1 em,.eyebrow,.bar{animation:none!important}}
+
+</style>
+
+<style id="theme-toggle-styles">
+.toptools{display:flex;align-items:center;gap:8px;min-width:0}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:8px 11px;border-radius:999px;font-weight:900;font-size:.82rem;box-shadow:0 6px 18px #0000000a;transition:.2s}
+.theme-toggle:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 10px 24px color-mix(in srgb,var(--accent) 16%,transparent)}
+.theme-toggle .ic{width:1.1em;height:1.1em}
+.theme-moon{display:none}
+html[data-theme="dark"] .theme-sun{display:none}
+html[data-theme="dark"] .theme-moon{display:block}
+html[data-theme="dark"] .theme-toggle{background:#151a28}
+html[data-theme="light"]{color-scheme:light}
+html[data-theme="light"] .tile{background:hsl(var(--h) 90% 92%);color:hsl(var(--h) 70% 36%)}
+html[data-theme="dark"]{color-scheme:dark}
+html[data-theme="dark"] .tile{background:hsl(var(--h) 35% 24%);color:hsl(var(--h) 90% 76%)}
+html[data-theme="light"] body::after{background-image:linear-gradient(#4b3bb20b 1px,transparent 1px),linear-gradient(90deg,#4b3bb20b 1px,transparent 1px)}
+@media(max-width:760px){.theme-label{display:none}.theme-toggle{width:40px;height:40px;padding:0}.toptools{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){.theme-toggle{transition:none}}
+</style>
+<script>
+(function(){
+  try{
+    const saved=localStorage.getItem('minilab-theme');
+    const theme=saved==='light'||saved==='dark'?saved:(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    document.documentElement.dataset.theme=theme;
+  }catch(e){}
+})();
+</script>
+</head>
+
+<body>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6l-5.5 9.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3M7.5 15h9"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 20v-5M12 20V9M19 20V4"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8L3 12Z"/><circle cx="7.5" cy="8.5" r="1"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 21v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"/></symbol>
+  <symbol id="i-printer" viewBox="0 0 24 24"><path d="M7 8V3h10v5M7 17H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M7 14h10v7H7v-7Z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9L12 3Z"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-4.6-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 6.4-8 11-8 11Z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="6" y="11" width="12" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0V4ZM8 6H4v1a3 3 0 0 0 4 3M16 6h4v1a3 3 0 0 1-4 3M12 13v4M8 21h8M10 17h4"/></symbol>
+  <symbol id="i-volcano" viewBox="0 0 24 24"><path d="M3 21l6-12h6l6 12H3ZM12 3v3M8.5 4.5l1 2M15.5 4.5l-1 2"/></symbol>
+  <symbol id="i-bubbles" viewBox="0 0 24 24"><circle cx="9" cy="15" r="4.5"/><circle cx="17" cy="8" r="3"/><circle cx="16.5" cy="17.5" r="1.5"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></symbol>
+  <symbol id="i-rainbow" viewBox="0 0 24 24"><path d="M2 18a10 10 0 0 1 20 0M6 18a6 6 0 0 1 12 0M10 18a2 2 0 0 1 4 0"/></symbol>
+  <symbol id="i-lamp" viewBox="0 0 24 24"><path d="M9 3h6l2 5v10a3 3 0 0 1-3 3h-4a3 3 0 0 1-3-3V8l2-5Z"/><circle cx="11" cy="12" r="1.6"/><circle cx="13.5" cy="16.5" r="1"/></symbol>
+  <symbol id="i-glass" viewBox="0 0 24 24"><path d="M7 3h10l-1.5 17a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1L7 3ZM7.6 9h8.8"/></symbol>
+  <symbol id="i-balloon" viewBox="0 0 24 24"><path d="M12 2a6 7 0 0 0-6 7c0 4 3 7 6 7s6-3 6-7a6 7 0 0 0-6-7ZM12 16l-1.5 2h3L12 16ZM12 18c0 2 2 2 2 4"/></symbol>
+  <symbol id="i-cube" viewBox="0 0 24 24"><path d="M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2ZM4 6.5l8 4.5 8-4.5M12 11v9"/></symbol>
+  <symbol id="i-cups" viewBox="0 0 24 24"><path d="M3 4h6l-.8 14a1 1 0 0 1-1 1H4.8a1 1 0 0 1-1-1L3 4ZM15 4h6l-.8 14a1 1 0 0 1-1 1h-2.4a1 1 0 0 1-1-1L15 4ZM6 9c3-3 9-3 12 0"/></symbol>
+  <symbol id="i-egg" viewBox="0 0 24 24"><path d="M12 3c4 0 7 6 7 11a7 7 0 0 1-14 0c0-5 3-11 7-11Z"/></symbol>
+  <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M12 21v-9M12 12c0-4 3-6 7-6 0 4-3 6-7 6ZM12 14c0-3-2.5-5-6-5 0 3 2.5 5 6 5Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.8A8.5 8.5 0 0 1 9.2 3.5 8.5 8.5 0 1 0 20.5 14.8Z"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="topin">
+    <a class="brand" href="#home"><svg class="ic" aria-hidden="true"><use href="#i-flask"/></svg>Mini<span>Lab X</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#experiments">Experiments</a>
+      <a href="#log">My notebook</a>
+      <a href="#how">How it works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="toptools">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <svg class="ic theme-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        <svg class="ic theme-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+        <span class="theme-label">Dark mode</span>
+      </button>
+      <div class="acctbar" id="acctBar"></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<main id="main">
+
+<section class="hero" id="home" style="margin-top:0">
+  <div>
+    <span class="eyebrow"><svg class="ic" aria-hidden="true"><use href="#i-heart"/></svg>Free, no ads, no email needed</span>
+    <h1>Turn curiosity into <em>WOW.</em></h1>
+    <p>Pick a challenge, make a prediction, run the experiment, and unlock the science behind the surprise. <strong>Ready to think like a scientist?</strong> <span id="labCount"></span> experiments to explore, and grown-ups can add their own.</p>
+    <div class="ctas">
+      <a class="btn" href="#experiments">Enter the Lab <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <button class="btn ghost" type="button" id="heroSignup"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>Sign up to track progress</button>
+      <button class="btn ghost" type="button" id="heroDaily"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg>Daily Mission</button>
+    </div>
+  </div>
+  <div class="heroart" id="heroart" aria-hidden="true"></div>
+</section>
+
+<div class="features">
+  <div class="feat"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Kid-friendly materials</div>
+  <div class="feat"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg>Profiles for every explorer</div>
+  <div class="feat"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>Grown-ups add experiments</div>
+  <div class="feat"><svg class="ic" aria-hidden="true"><use href="#i-printer"/></svg>Printable sheets</div>
+</div>
+
+<section id="daily-sec" style="margin-top:20px" aria-label="Daily Mission">
+  <div class="daily" id="daily"></div>
+</section>
+
+<section id="experiments" aria-labelledby="exp-title">
+  <div class="shead">
+    <h2 id="exp-title">Choose an experiment</h2>
+    <p>Always do experiments with a grown-up nearby. Never taste anything from an experiment, and wash your hands afterward.</p>
+  </div>
+
+  <div class="rank" id="rank"></div>
+
+  <div class="search">
+    <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+    <input type="search" id="q" placeholder="Search experiments (try “bubbles” or “water”)" aria-label="Search experiments">
+  </div>
+  <div class="filters" role="group" aria-label="Filter experiments" id="filters"></div>
+  <p class="count" id="resultCount" aria-live="polite"></p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="log" aria-labelledby="logTitle">
+  <div class="shead">
+    <h2 id="logTitle">My notebook</h2>
+    <p id="logSub"></p>
+  </div>
+  <div id="logList"></div>
+</section>
+
+<section id="how" aria-labelledby="how-title">
+  <div class="shead">
+    <h2 id="how-title">How it works</h2>
+    <p>Real scientists follow these three steps. Now you can too.</p>
+  </div>
+  <div class="steps3">
+    <div class="how" style="--h:260"><div class="tile"><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg></div><h3>1. Predict</h3><p>Look at the question and make a guess about what will happen. Wrong guesses are welcome!</p></div>
+    <div class="how" style="--h:30"><div class="tile"><svg class="ic" aria-hidden="true"><use href="#i-flask"/></svg></div><h3>2. Try it</h3><p>Gather your materials and follow the simple steps. Tick them off as you go.</p></div>
+    <div class="how" style="--h:140"><div class="tile"><svg class="ic" aria-hidden="true"><use href="#i-star"/></svg></div><h3>3. Learn why</h3><p>Find out the science behind it, fill your notebook, and level up your scientist rank.</p></div>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="faq-title">
+  <div class="shead">
+    <h2 id="faq-title">Questions grown-ups ask</h2>
+    <p>Quick answers before you start.</p>
+  </div>
+  <div id="faqlist"></div>
+</section>
+
+<div class="footer">
+  Made for curious families. Experiments use common household items, but an adult should always supervise, check for allergies, and decide what is right for their child.
+  Everything is saved on this device only.
+  <button type="button" id="reset" hidden>Reset guest progress</button>
+</div>
+
+</main>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<!-- Experiment dialog -->
+<dialog id="dlg" aria-labelledby="dtitle">
+  <div class="dhead">
+    <div class="dtitle"><span class="tile" id="dtile"></span><h2 id="dtitle"></h2></div>
+    <div class="dbtns">
+      <span class="dstatus" id="dstatus" role="status"></span>
+      <button class="btn ghost small" type="button" id="shareBtn"><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg>Share</button>
+      <button class="btn ghost small" type="button" id="printBtn"><svg class="ic" aria-hidden="true"><use href="#i-printer"/></svg>Print</button>
+      <button class="btn ghost small" type="button" id="closeBtn" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+    </div>
+  </div>
+  <div class="dbody" id="dbody"></div>
+</dialog>
+
+<!-- Account dialog -->
+<dialog id="acct" class="narrow" aria-labelledby="acctTitle">
+  <div class="dhead">
+    <div class="dtitle"><span class="tile" style="--h:260"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg></span><h2 id="acctTitle"></h2></div>
+    <button class="btn ghost small" type="button" id="acctClose" aria-label="Close"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="dbody" id="acctBody"></div>
+</dialog>
+
+<!-- Grown-ups dashboard -->
+<dialog id="adm" class="wide" aria-labelledby="admTitle">
+  <div class="dhead">
+    <div class="dtitle"><span class="tile" style="--h:38"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span><h2 id="admTitle">Grown-ups dashboard</h2></div>
+    <div class="dbtns">
+      <span class="dstatus" id="admStatus" role="status"></span>
+      <button class="btn ghost small" type="button" id="admLock"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg>Lock and close</button>
+    </div>
+  </div>
+  <div class="tabs" role="tablist" id="admTabs" aria-label="Dashboard sections"></div>
+  <div class="dbody" id="admBody"></div>
+</dialog>
+
+<!-- Confirm dialog -->
+<dialog id="cfm" class="narrow" aria-labelledby="cfmMsg">
+  <div class="dbody" style="padding-top:22px">
+    <p id="cfmMsg" style="font-weight:800;font-size:1.05rem;margin:0"></p>
+    <div class="actions">
+      <button class="btn danger" type="button" id="cfmOk"></button>
+      <button class="btn ghost" type="button" id="cfmNo">Cancel</button>
+    </div>
+  </div>
+</dialog>
+
+
+<script>
+/* =========================================================
+   Data
+   ========================================================= */
+const builtIn = [
+  {
+    id:'volcano', icon:'volcano', hue:14, cat:'Chemistry', title:'Fizzy Volcano', time:10, level:'Easy', mess:'Very messy',
+    blurb:'Make a bubbling, foamy eruption right on your tray.',
+    adult:'Do this on a tray, in the sink, or outside. Food coloring can stain clothes.',
+    materials:['A small cup or bottle','2 tablespoons of baking soda','½ cup of vinegar','A few drops of dish soap','Food coloring (optional)','A tray or baking dish'],
+    steps:['Put the cup in the middle of the tray.','Add the baking soda to the cup.','Add a few drops of dish soap and some food coloring.','Pour in the vinegar and step back.','Watch the foam rise and spill over!'],
+    question:'What do you think makes the volcano fizz?',
+    options:['The baking soda and vinegar react and make a gas','The dish soap heats up the cup','The food coloring makes bubbles'],
+    answer:0,
+    why:'Vinegar is an acid and baking soda is a base. When they meet, they make carbon dioxide gas. The dish soap traps that gas in bubbles, so you get lots of thick foam.'
+  },
+  {
+    id:'raisins', icon:'bubbles', hue:275, cat:'Chemistry', title:'Dancing Raisins', time:10, level:'Easy', mess:'Not messy',
+    blurb:'Watch raisins rise, sink and rise again like tiny dancers.',
+    adult:'Use clear fizzy water from a fresh bottle. Do not drink the water afterwards.',
+    materials:['A tall clear glass','Fresh sparkling water or clear lemon-lime soda','5 to 6 raisins'],
+    steps:['Fill the glass with sparkling water.','Drop in the raisins one at a time.','Watch closely for a minute or two.','Look for tiny bubbles on the raisins.'],
+    question:'What will the raisins do?',
+    options:['Sink and stay at the bottom','Rise to the top, sink, then rise again','Float straight away and never move'],
+    answer:1,
+    why:'Raisins are a little heavier than water, so they sink. Bubbles of gas stick to their wrinkly skin and lift them up. At the top the bubbles pop, and the raisins sink again to collect more.'
+  },
+  {
+    id:'water', icon:'drop', hue:210, cat:'Physics', title:'Bending Water', time:5, level:'Easy', mess:'A little wet',
+    blurb:'Bend a stream of water without touching it.',
+    adult:'Do this over a sink. Use a thin stream of tap water.',
+    materials:['An inflated balloon','A wool sweater or your clean, dry hair','A tap'],
+    steps:['Turn on the tap so a thin, steady stream flows.','Rub the balloon on the sweater or your hair for about 20 seconds.','Hold the balloon close to the water stream, but do not touch it.','Watch what the water does.'],
+    question:'What will happen to the water when the balloon is near it?',
+    options:['Nothing at all','The stream bends toward the balloon','The stream splashes away from the balloon'],
+    answer:1,
+    why:'Rubbing gives the balloon an electric charge, called static electricity. Water is slightly charged at its ends, so the stream is pulled toward the balloon and bends.'
+  },
+  {
+    id:'rainbow', icon:'rainbow', hue:330, cat:'Physics', title:'Rainbow Density Tower', time:25, level:'Medium', mess:'A little messy',
+    blurb:'Stack four colors of sugar water into a rainbow.',
+    adult:'Use warm water only, not hot. A grown-up should help with pouring.',
+    materials:['4 small glasses','Sugar (about 10 tablespoons)','Warm water','4 colors of food coloring','A spoon and a tall clear glass','A dropper or a second spoon'],
+    steps:['In four glasses, put 3 tablespoons of warm water each.','Add 1, 2, 3 and 4 tablespoons of sugar to the glasses, and stir until dissolved.','Add a different food coloring to each glass.','In the tall glass, pour the 4-sugar color first.','Slowly pour the next color over the back of a spoon so it floats on top. Repeat for the rest.'],
+    question:'Which color will end up at the very bottom?',
+    options:['The one with the least sugar','The one with the most sugar','The one you pour last'],
+    answer:1,
+    why:'More sugar in the same amount of water makes it denser, or heavier for its size. Denser liquids sink and lighter ones float, so your layers stack in order.'
+  },
+  {
+    id:'lava', icon:'lamp', hue:38, cat:'Physics', title:'Salt Lava Lamp', time:10, level:'Easy', mess:'Not messy',
+    blurb:'Make blobs of oil float and sink in your own lava lamp.',
+    adult:'Never taste the oil or the water afterwards. Wipe up spills so the floor is not slippery.',
+    materials:['A tall clear jar or bottle','Water','Vegetable oil','Food coloring','Table salt'],
+    steps:['Fill the jar about one third with water.','Add a few drops of food coloring.','Slowly pour oil on top until the jar is nearly full.','Wait for the colored drops to settle.','Sprinkle a little salt on top and watch.'],
+    question:'What will the oil and water do?',
+    options:['Mix into one color','Stay apart, with the oil floating on top','The water will float on the oil'],
+    answer:1,
+    why:'Oil and water do not mix, and oil is lighter, so it floats. Salt is heavier than oil, so it sinks and drags blobs of oil down with it. When the salt dissolves, the oil blobs float back up.'
+  },
+  {
+    id:'milk', icon:'glass', hue:165, cat:'Chemistry', title:'Magic Milk Colors', time:5, level:'Easy', mess:'Not messy',
+    blurb:'Make swirling colors burst across a plate of milk.',
+    adult:'Do not drink the milk afterwards, and wash hands after touching soap. Check for milk allergies.',
+    materials:['A shallow plate','Whole milk','Food coloring (a few colors)','A cotton swab','A drop of dish soap'],
+    steps:['Pour milk onto the plate until it covers the bottom.','Add drops of food coloring in different spots.','Dip the cotton swab in a little dish soap.','Gently touch the swab to the milk and hold it there.','Watch the colors move!'],
+    question:'What will happen when the soapy swab touches the milk?',
+    options:['Nothing, the colors stay still','The colors rush and swirl around','The milk turns solid'],
+    answer:1,
+    why:'Soap spreads out the surface of the milk and chases after the fat in it. This pushes the food coloring around and makes swirling patterns.'
+  },
+  {
+    id:'yeast', icon:'balloon', hue:95, cat:'Biology', title:'Yeast Balloon', time:25, level:'Easy', mess:'Not messy',
+    blurb:'Inflate a balloon with nothing but tiny living yeast.',
+    adult:'Use warm water, not hot. Do not taste anything, and wash hands afterwards.',
+    materials:['A small clean plastic bottle','1 packet of dry yeast','1 tablespoon of sugar','½ cup of warm water','A balloon'],
+    steps:['Pour the warm water into the bottle.','Add the yeast and sugar, then swirl gently.','Stretch the balloon over the mouth of the bottle.','Put the bottle somewhere warm for 15 to 20 minutes.','Check on the balloon and watch it grow.'],
+    question:'What will fill the balloon?',
+    options:['Gas made by the yeast eating sugar','Steam from the warm water','Air sucked in from the room'],
+    answer:0,
+    why:'Yeast are tiny living things. They eat the sugar and release carbon dioxide gas, the same gas that makes bread rise. The gas collects in the bottle and slowly inflates the balloon.'
+  },
+  {
+    id:'ice', icon:'cube', hue:190, cat:'Chemistry', title:'Salt Ice Fishing', time:5, level:'Easy', mess:'A little wet',
+    blurb:'Lift an ice cube out of water using only a piece of string.',
+    adult:'Keep salt away from eyes, and do not taste it. Wipe up spills.',
+    materials:['A glass of water','An ice cube','A piece of string about 15 cm long','A pinch of salt'],
+    steps:['Float the ice cube in the glass of water.','Lay one end of the string across the top of the ice cube.','Sprinkle a pinch of salt over the string and ice.','Wait about one minute.','Lift the string gently and see what happens.'],
+    question:'What will happen when you lift the string?',
+    options:['The string slides off','The ice cube lifts up with the string','The ice cube melts instantly'],
+    answer:1,
+    why:'Salt makes a little of the ice melt, which makes the surface extra cold and salty. Soon the water around the string refreezes and traps it, so the string sticks to the ice cube.'
+  },
+  {
+    id:'walking', icon:'cups', hue:255, cat:'Physics', title:'Walking Water', time:30, level:'Easy', mess:'A little wet',
+    blurb:'Watch colored water climb up paper and mix into a new color.',
+    adult:'Place cups on a tray to catch drips. Food coloring can stain.',
+    materials:['3 clear cups','Paper towels','Water','Red and blue food coloring','A tray'],
+    steps:['Line up the three cups on the tray.','Fill the first and third cups with water and leave the middle one empty.','Color the first cup red and the third cup blue.','Fold two paper towel strips. Put one between cups 1 and 2, and one between cups 2 and 3.','Wait and watch for 15 to 30 minutes.'],
+    question:'What will happen in the empty middle cup?',
+    options:['It will stay empty','Water climbs the paper and mixes into a new color','The water will turn clear'],
+    answer:1,
+    why:'Water sticks to the tiny fibers in the paper and to itself, so it creeps upward and along the paper. This is called capillary action. The red and blue meet in the middle cup and make purple.'
+  },
+  {
+    id:'egg', icon:'egg', hue:50, cat:'Physics', title:'Floating Egg', time:15, level:'Medium', mess:'A little wet',
+    blurb:'Make an egg float by changing the water, not the egg.',
+    adult:'Use a hard-boiled egg, and wash hands afterwards. Do not eat the egg or drink the water.',
+    materials:['2 tall glasses','1 hard-boiled egg, cooled','Water','Salt (about 6 tablespoons)','A spoon'],
+    steps:['Fill one glass with plain water.','Gently lower the egg in and see what it does.','Fill the second glass with warm water.','Stir in salt a spoonful at a time until no more will dissolve.','Let it cool, then gently lower the egg in.'],
+    question:'What will the egg do in very salty water?',
+    options:['Sink faster','Float','Crack open'],
+    answer:1,
+    why:'Salt dissolves into the water and makes it denser. The egg is denser than plain water, so it sinks there, but it is lighter than very salty water, so it floats. This is why it is easy to float in the sea.'
+  },
+  {
+    id:'bean', icon:'sprout', hue:130, cat:'Biology', title:'Bean in a Bag', time:10, level:'Easy', mess:'Not messy',
+    blurb:'Watch a seed wake up and grow roots, day by day.',
+    adult:'Wash hands after handling the seed and the damp paper towel. Do not eat the bean.',
+    materials:['A clear zip-top bag','A paper towel','A dry bean or seed','Water','Tape'],
+    steps:['Fold the paper towel so it fits inside the bag.','Dampen the paper towel until it is wet but not dripping.','Place the bean against the clear side of the bag and seal it.','Tape the bag to a sunny window.','Check every day and keep the towel damp.'],
+    question:'What will the bean grow first?',
+    options:['A leaf','A root','A flower'],
+    answer:1,
+    why:'A seed wakes up when it gets water and warmth. The root comes out first to drink water and hold the plant in place. Then a shoot grows upward toward the light.'
+  }
+];
+
+const faqs = [
+  { q:'Are these experiments safe for kids?', a:'They use common household items, but an adult should always supervise. Never taste anything from an experiment, wash hands afterwards, and check for allergies (for example milk, eggs or food coloring) before you start.' },
+  { q:'What ages are these for?', a:'Younger children can join in with full adult help, and older children can lead the experiments themselves. You know your child best, so adjust the level of help to suit them.' },
+  { q:'Do I need to buy special equipment?', a:'No. Everything is found in a typical kitchen or cupboard, such as vinegar, baking soda, salt, food coloring and clear glasses.' },
+  { q:'How does sign-up work? Is my data safe?', a:'Sign-up creates a family profile with a grown-up PIN and nicknames for each child. No email or personal details are needed. Everything is saved in this browser on this device and is not sent anywhere. Use Backup in the Grown-ups dashboard to move your family to another device.' },
+  { q:'How do grown-ups add experiments?', a:'Sign up, then open Grown-ups in the top bar and enter your PIN. In the Experiments tab you can write your own experiment with materials, steps, a prediction question and an explanation. You can also hide built-in experiments that are not right for your child.' },
+  { q:'I forgot my PIN. What can I do?', a:'On the PIN screen choose the reset option. This erases the family profiles and progress on this device, but keeps your own experiments. If you have a backup file you can restore it afterwards.' },
+  { q:'Can I print an experiment?', a:'Yes. Open any experiment and press Print to get a clean sheet with checklists you can tick off on paper.' },
+  { q:'How can we think more like scientists?', a:'Make a prediction first, change just one thing at a time, and write down what you see. If the result surprises you, try again and ask why.' }
+];
+
+const ICONS = ['volcano','bubbles','drop','rainbow','lamp','glass','balloon','cube','cups','egg','sprout','flask','bulb','star'];
+const CATS = ['Chemistry','Physics','Biology'];
+const LEVELS = ['Easy','Medium'];
+const MESS = ['Not messy','A little wet','A little messy','Very messy'];
+const HUES = [14,38,50,95,130,165,190,210,255,275,330];
+const AVATARS = [
+  { icon:'flask', hue:260 }, { icon:'star', hue:38 }, { icon:'sprout', hue:130 }, { icon:'rainbow', hue:330 },
+  { icon:'bulb', hue:50 }, { icon:'drop', hue:210 }, { icon:'balloon', hue:14 }, { icon:'cube', hue:190 }
+];
+const ranks = [
+  { n:0, name:'Lab Newbie' }, { n:3, name:'Junior Scientist' }, { n:6, name:'Super Scientist' }, { n:10, name:'Lab Legend' }
+];
+
+
+/* =========================================================
+   Helpers
+   ========================================================= */
+const $ = id => document.getElementById(id);
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function icon(name, cls){
+  const s = document.createElementNS(SVG_NS, 'svg');
+  s.setAttribute('class', cls || 'ic');
+  s.setAttribute('aria-hidden', 'true');
+  const u = document.createElementNS(SVG_NS, 'use');
+  u.setAttribute('href', '#i-' + name);
+  s.appendChild(u);
+  return s;
+}
+
+function el(tag, props, ...kids){
+  const n = document.createElement(tag);
+  Object.entries(props || {}).forEach(([k, v]) => {
+    if(k === 'class') n.className = v;
+    else if(k === 'text') n.textContent = v;
+    else if(k.startsWith('on')) n.addEventListener(k.slice(2), v);
+    else n.setAttribute(k, v);
+  });
+  kids.flat().forEach(c => { if(c) n.append(c); });
+  return n;
+}
+
+function tile(o, size){
+  return el('span', { class:'tile' + (size ? ' ' + size : ''), style:'--h:' + o.hue }, icon(o.icon));
+}
+function tag(iconName, text){ return el('span', { class:'tag' }, icon(iconName), text); }
+
+function uid(){ return Math.random().toString(36).slice(2, 10); }
+function safeHistory(url){ try { history.replaceState(null, '', url); } catch {} }
+function fmtDate(t){ try { return new Date(t).toLocaleDateString(undefined, { month:'short', day:'numeric' }); } catch { return ''; } }
+
+let toastTimer;
+function toast(msg){
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function confirmDlg(msg, okLabel){
+  return new Promise(resolve => {
+    const d = $('cfm');
+    $('cfmMsg').textContent = msg;
+    $('cfmOk').textContent = okLabel || 'Yes';
+    let settled = false;
+    const finish = v => { if(!settled){ settled = true; resolve(v); } };
+    $('cfmOk').onclick = () => { d.close(); finish(true); };
+    $('cfmNo').onclick = () => { d.close(); finish(false); };
+    d.oncancel = () => finish(false);
+    d.onclose = () => finish(false);
+    d.showModal();
+  });
+}
+
+
+/* =========================================================
+   State and storage (browser only)
+   ========================================================= */
+const SKEY = 'miniLabV3';
+let memStore = null;
+
+function readStore(){ try { return localStorage.getItem(SKEY); } catch { return memStore; } }
+function writeStore(s){ memStore = s; try { localStorage.setItem(SKEY, s); } catch {} }
+
+function defaultState(){
+  return { v:3, family:null, kids:[], guest:{ done:{} }, activeKid:null, custom:[], hidden:[] };
+}
+function str(v, max){ return typeof v === 'string' ? v.slice(0, max) : ''; }
+
+function sanitizeDone(d){
+  const out = {};
+  if(d && typeof d === 'object' && !Array.isArray(d)){
+    Object.keys(d).slice(0, 300).forEach(k => {
+      if(k.length <= 60){
+        const v = d[k] || {};
+        out[k] = { t:Number(v.t) || Date.now(), r:typeof v.r === 'boolean' ? v.r : null };
+      }
+    });
+  }
+  return out;
+}
+
+function sanitizeLab(o){
+  if(!o || typeof o !== 'object') return null;
+  const lines = (a, maxN, maxL) => Array.isArray(a) ? a.map(x => str(x, maxL).trim()).filter(Boolean).slice(0, maxN) : [];
+  const title = str(o.title, 60).trim();
+  const materials = lines(o.materials, 20, 120);
+  const steps = lines(o.steps, 20, 300);
+  const options = lines(o.options, 3, 150);
+  const question = str(o.question, 200).trim();
+  const why = str(o.why, 600).trim();
+  if(!title || !materials.length || !steps.length || options.length !== 3 || !question || !why) return null;
+  let id = str(o.id, 40);
+  if(!/^c-[a-z0-9]+$/.test(id)) id = 'c-' + uid();
+  const hue = Number(o.hue);
+  return {
+    id, custom:true,
+    icon:ICONS.includes(o.icon) ? o.icon : 'flask',
+    hue:Number.isFinite(hue) ? Math.max(0, Math.min(360, hue)) : 260,
+    cat:CATS.includes(o.cat) ? o.cat : 'Chemistry',
+    title,
+    time:Math.max(1, Math.min(240, parseInt(o.time, 10) || 10)),
+    level:LEVELS.includes(o.level) ? o.level : 'Easy',
+    mess:MESS.includes(o.mess) ? o.mess : 'Not messy',
+    blurb:str(o.blurb, 160).trim() || title,
+    adult:str(o.adult, 300).trim() || 'An adult should supervise.',
+    materials, steps, question, options,
+    answer:Number.isInteger(o.answer) && o.answer >= 0 && o.answer < 3 ? o.answer : 0,
+    why
+  };
+}
+
+function sanitizeState(o){
+  if(!o || typeof o !== 'object') return null;
+  const s = defaultState();
+  const f = o.family;
+  if(f && typeof f === 'object' && typeof f.hash === 'string' && typeof f.salt === 'string'){
+    s.family = { name:str(f.name, 40), salt:str(f.salt, 64), hash:str(f.hash, 128) };
+  }
+  if(s.family && Array.isArray(o.kids)){
+    s.kids = o.kids.slice(0, 12).map((k, i) => {
+      k = k || {};
+      const av = AVATARS[i % AVATARS.length];
+      return {
+        id:str(k.id, 30) || uid(),
+        name:str(k.name, 20).trim() || 'Explorer',
+        icon:ICONS.concat(['user']).includes(k.icon) ? k.icon : av.icon,
+        hue:Number.isFinite(Number(k.hue)) ? Number(k.hue) : av.hue,
+        done:sanitizeDone(k.done)
+      };
+    });
+  }
+  s.guest = { done:sanitizeDone(o.guest && o.guest.done) };
+  if(s.kids.some(k => k.id === o.activeKid)) s.activeKid = o.activeKid;
+  const seen = new Set();
+  if(Array.isArray(o.custom)){
+    o.custom.slice(0, 50).forEach(c => {
+      const l = sanitizeLab(c);
+      if(l && !seen.has(l.id)){ seen.add(l.id); s.custom.push(l); }
+    });
+  }
+  if(Array.isArray(o.hidden)) s.hidden = o.hidden.filter(x => typeof x === 'string').map(x => x.slice(0, 60)).slice(0, 50);
+  return s;
+}
+
+function loadState(){
+  const raw = readStore();
+  if(raw){
+    try { const s = sanitizeState(JSON.parse(raw)); if(s) return s; } catch {}
+  }
+  const s = defaultState();
+  try {
+    const old = JSON.parse(localStorage.getItem('miniLabDone') || '[]');
+    if(Array.isArray(old)) old.forEach(id => { if(typeof id === 'string') s.guest.done[id] = { t:Date.now(), r:null }; });
+  } catch {}
+  return s;
+}
+
+let state = loadState();
+function save(){ writeStore(JSON.stringify(state)); }
+
+/* Profiles and progress */
+function profile(){ return state.kids.find(k => k.id === state.activeKid) || null; }
+function curDone(){ const p = profile(); return p ? p.done : state.guest.done; }
+function isDone(id){ return Object.prototype.hasOwnProperty.call(curDone(), id); }
+function doneCount(){ return Object.keys(curDone()).length; }
+function profileName(){ const p = profile(); return p ? p.name : 'Guest'; }
+function markDone(id, right){ curDone()[id] = { t:Date.now(), r:right }; save(); }
+
+/* Experiments */
+function getLabs(){ return builtIn.filter(l => !state.hidden.includes(l.id)).concat(state.custom); }
+function labById(id){ return builtIn.concat(state.custom).find(l => l.id === id) || null; }
+
+function getRank(count){
+  let cur = ranks[0];
+  ranks.forEach(r => { if(count >= r.n) cur = r; });
+  return { cur, next:ranks.find(r => r.n > count) };
+}
+
+/* PIN hashing (a local gate, not server security) */
+function randomHex(n){
+  const a = new Uint8Array(n);
+  const c = window.crypto;
+  if(c && c.getRandomValues) c.getRandomValues(a);
+  else a.forEach((_, i) => { a[i] = Math.floor(Math.random() * 256); });
+  return [...a].map(b => b.toString(16).padStart(2, '0')).join('');
+}
+async function hashPin(pin, salt){
+  const data = new TextEncoder().encode(salt + ':' + pin);
+  const c = window.crypto;
+  if(c && c.subtle){
+    try {
+      const buf = await c.subtle.digest('SHA-256', data);
+      return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+    } catch {}
+  }
+  let h = 5381;
+  data.forEach(b => { h = ((h << 5) + h + b) >>> 0; });
+  return 'f' + h.toString(16);
+}
+const PIN_RE = /^\d{4,6}$/;
+
+
+/* =========================================================
+   Page rendering
+   ========================================================= */
+$('labCount').textContent = builtIn.length;
+
+faqs.forEach(f => {
+  $('faqlist').append(el('details', {}, el('summary', {}, f.q, icon('chev')), el('p', { text:f.a })));
+});
+
+(function addJsonLd(){
+  const data = {
+    '@context':'https://schema.org',
+    '@graph':[
+      { '@type':'WebSite', name:'Mini Science Lab', description:'Free, easy science experiments for kids using everyday kitchen items.' },
+      {
+        '@type':'ItemList',
+        itemListElement:builtIn.map((l, i) => ({
+          '@type':'ListItem', position:i + 1,
+          item:{
+            '@type':'HowTo', name:l.title, description:l.blurb, totalTime:'PT' + l.time + 'M',
+            supply:l.materials.map(m => ({ '@type':'HowToSupply', name:m })),
+            step:l.steps.map(s => ({ '@type':'HowToStep', text:s }))
+          }
+        }))
+      },
+      { '@type':'FAQPage', mainEntity:faqs.map(f => ({ '@type':'Question', name:f.q, acceptedAnswer:{ '@type':'Answer', text:f.a } })) }
+    ]
+  };
+  const s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify(data);
+  document.head.appendChild(s);
+})();
+
+function kidLook(p){ return p ? { icon:p.icon, hue:p.hue } : { icon:'user', hue:260 }; }
+
+/* Header */
+function renderHeader(){
+  const bar = $('acctBar');
+  bar.replaceChildren();
+  $('heroSignup').hidden = !!state.family;
+  $('reset').hidden = !!state.family;
+  if(!state.family){
+    bar.append(el('button', { class:'btn small', type:'button', onclick:() => openAcct('signup') }, icon('user'), 'Sign up'));
+    return;
+  }
+  bar.append(
+    el('button', { class:'btn ghost small', type:'button', 'aria-label':'Switch player. Playing as ' + profileName(), onclick:() => openAcct('picker') },
+      tile(kidLook(profile()), 'sm'), profileName()),
+    el('button', { class:'btn ghost small', type:'button', onclick:() => openAcct('pin') }, icon('shield'), 'Grown-ups')
+  );
+}
+
+/* Hero + daily */
+function renderHero(){
+  const art = $('heroart');
+  art.replaceChildren();
+  getLabs().slice(0, 6).forEach(l => art.append(tile(l)));
+}
+function dailyLab(){
+  const labs = getLabs();
+  return labs[Math.floor(Date.now() / 86400000) % labs.length];
+}
+function renderDaily(){
+  const l = dailyLab();
+  const box = $('daily');
+  if(!l){ box.replaceChildren(); return; }
+  box.replaceChildren(
+    tile(l),
+    el('div', { class:'txt' },
+      el('div', { class:'lbl' }, icon('star'), 'Experiment of the day'),
+      el('h3', { text:l.title }),
+      el('p', { text:l.blurb })
+    ),
+    el('button', { class:'btn', type:'button', onclick:() => openLab(l) }, 'Try it now', icon('arrow'))
+  );
+}
+$('heroDaily').addEventListener('click', () => { const l = dailyLab(); if(l) openLab(l); });
+$('heroSignup').addEventListener('click', () => openAcct('signup'));
+
+/* Rank panel */
+function renderRank(){
+  const n = doneCount();
+  const { cur, next } = getRank(n);
+  const pct = Math.min(100, n / ranks[ranks.length - 1].n * 100);
+  let sub = next ? n + ' done. ' + (next.n - n) + ' more to become a ' + next.name + '.' : n + ' experiments done. Amazing work!';
+
+  const bar = el('div', { class:'progress', role:'progressbar', 'aria-label':'Progress to the top rank', 'aria-valuemin':'0', 'aria-valuemax':'100', 'aria-valuenow':String(Math.round(pct)) },
+    el('div', { class:'bar', style:'width:' + pct + '%' }));
+
+  const kids = [icon('trophy'), el('div', { class:'rtxt' },
+    el('strong', { text:profileName() + ': ' + cur.name }),
+    el('small', { text:sub }),
+    bar)];
+
+  if(!state.family){
+    kids.push(el('button', { class:'btn small', type:'button', onclick:() => openAcct('signup') }, icon('user'), 'Sign up to save'));
+  } else if(!profile()){
+    kids.push(el('button', { class:'btn small', type:'button', onclick:() => openAcct('picker') }, icon('user'), 'Pick your name'));
+  }
+  $('rank').replaceChildren(...kids);
+}
+
+/* Filters + grid */
+function getFilters(){
+  const f = [
+    { id:'all', label:'All', test:() => true },
+    { id:'easy', label:'Easy', test:l => l.level === 'Easy' },
+    { id:'quick', label:'Quick (10 min or less)', test:l => l.time <= 10 },
+    { id:'Chemistry', label:'Chemistry', test:l => l.cat === 'Chemistry' },
+    { id:'Physics', label:'Physics', test:l => l.cat === 'Physics' },
+    { id:'Biology', label:'Biology', test:l => l.cat === 'Biology' }
+  ];
+  if(state.custom.length) f.push({ id:'family', label:'Family experiments', test:l => !!l.custom });
+  f.push({ id:'todo', label:'Not done yet', test:l => !isDone(l.id) });
+  f.push({ id:'done', label:'Done', test:l => isDone(l.id) });
+  return f;
+}
+let activeFilter = 'all';
+let query = '';
+
+function renderFilters(){
+  const fs = getFilters();
+  if(!fs.some(f => f.id === activeFilter)) activeFilter = 'all';
+  const box = $('filters');
+  box.replaceChildren();
+  fs.forEach(f => {
+    box.append(el('button', {
+      class:'chip', type:'button', text:f.label, 'aria-pressed':String(f.id === activeFilter),
+      onclick:() => { activeFilter = f.id; renderFilters(); renderGrid(); }
+    }));
+  });
+}
+$('q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); renderGrid(); });
+
+function renderGrid(){
+  const f = getFilters().find(x => x.id === activeFilter) || getFilters()[0];
+  const labs = getLabs();
+  const list = labs.filter(l =>
+    f.test(l) && (!query || (l.title + ' ' + l.blurb + ' ' + l.cat + ' ' + l.materials.join(' ')).toLowerCase().includes(query))
+  );
+  const grid = $('grid');
+  grid.replaceChildren();
+  if(!list.length) grid.append(el('div', { class:'empty', text:'No experiments match. Try another word or filter!' }));
+
+  list.forEach(l => {
+    grid.append(el('div', { class:'card' },
+      isDone(l.id) ? el('span', { class:'badge' }, icon('check'), 'Done') : null,
+      tile(l),
+      el('h3', { text:l.title }),
+      el('p', { text:l.blurb }),
+      el('div', { class:'tags' }, tag('clock', l.time + ' min'), tag('bars', l.level), tag('tag', l.cat), l.custom ? tag('heart', 'Family') : null),
+      el('button', { class:'btn', type:'button', 'aria-label':'Start ' + l.title, onclick:() => openLab(l) }, 'Start experiment', icon('arrow'))
+    ));
+  });
+  $('resultCount').textContent = 'Showing ' + list.length + ' of ' + labs.length + ' experiments';
+  renderRank();
+}
+
+/* Notebook */
+function renderLog(){
+  const entries = Object.entries(curDone()).filter(([id]) => labById(id)).sort((a, b) => b[1].t - a[1].t);
+  const guessed = entries.filter(e => e[1].r !== null).length;
+  const right = entries.filter(e => e[1].r === true).length;
+  $('logTitle').textContent = profile() ? profile().name + "'s notebook" : 'My notebook';
+  $('logSub').textContent = entries.length
+    ? entries.length + ' experiment' + (entries.length === 1 ? '' : 's') + ' done' + (guessed ? '. Predictions right: ' + right + ' of ' + guessed + '.' : '.')
+    : 'Finish an experiment and it will appear here.';
+  const box = $('logList');
+  box.replaceChildren();
+  entries.forEach(([id, v]) => {
+    const l = labById(id);
+    box.append(el('button', { class:'logrow', type:'button', onclick:() => openLab(l) },
+      tile(l, 'md'),
+      el('div', { class:'grow' }, el('strong', { text:l.title }), el('small', { text:'Done ' + fmtDate(v.t) })),
+      el('span', { class:'tag', text:v.r === true ? 'Predicted right' : v.r === false ? 'Surprise!' : 'No guess' })
+    ));
+  });
+}
+
+function renderAll(){
+  renderHeader();
+  renderHero();
+  renderFilters();
+  renderGrid();
+  renderDaily();
+  renderLog();
+}
+
+
+/* =========================================================
+   Experiment dialog
+   ========================================================= */
+const dlg = $('dlg');
+const acct = $('acct');
+const adm = $('adm');
+let currentLab = null;
+const baseTitle = document.title;
+
+function closeAllBut(d){ [dlg, acct, adm].forEach(x => { if(x !== d && x.open) x.close(); }); }
+
+function checkRow(text){
+  return el('label', { class:'check' }, el('input', { type:'checkbox' }), el('span', { text }));
+}
+function showStatus(msg){
+  const s = $('dstatus');
+  s.textContent = msg;
+  clearTimeout(showStatus.t);
+  showStatus.t = setTimeout(() => { s.textContent = ''; }, 3500);
+}
+
+function openLab(l){
+  closeAllBut(dlg);
+  currentLab = l;
+  $('dtitle').textContent = l.title;
+  $('dtile').style.setProperty('--h', l.hue);
+  $('dtile').replaceChildren(icon(l.icon));
+  $('dstatus').textContent = '';
+
+  const body = $('dbody');
+  body.replaceChildren();
+
+  body.append(el('div', { class:'tags', style:'margin-top:14px' },
+    tag('clock', l.time + ' min'), tag('bars', l.level), tag('tag', l.cat), l.custom ? tag('heart', 'Family') : null));
+  body.append(el('div', { class:'grownup' }, icon('user'), el('span', { text:'Grown-up note: ' + l.adult })));
+
+  body.append(el('h3', { text:'1. Get your materials' }));
+  l.materials.forEach(m => body.append(checkRow(m)));
+
+  body.append(el('h3', { text:'2. Make a prediction' }));
+  body.append(el('p', { text:l.question, style:'margin:0 0 10px;font-weight:800' }));
+
+  let predicted = null;
+  const feedback = el('p', { style:'font-weight:800;margin:10px 0 0', 'aria-live':'polite' });
+  const optsBox = el('div', { class:'opts' });
+  l.options.forEach((o, i) => {
+    optsBox.append(el('button', {
+      class:'opt', type:'button', text:o, 'aria-pressed':'false',
+      onclick:e => {
+        predicted = i;
+        optsBox.querySelectorAll('.opt').forEach(b => b.setAttribute('aria-pressed', 'false'));
+        e.currentTarget.setAttribute('aria-pressed', 'true');
+        feedback.textContent = 'Great, your guess is locked in. Now try it and see!';
+      }
+    }));
+  });
+  body.append(optsBox, feedback);
+
+  body.append(el('h3', { text:'3. Do the experiment' }));
+  const ol = el('ol', { class:'steps' });
+  l.steps.forEach(s => ol.append(el('li', {}, checkRow(s))));
+  body.append(ol);
+
+  body.append(el('h3', { text:'4. What happened?' }));
+  const why = el('div', { class:'why', hidden:'', 'aria-live':'polite' });
+  body.append(why);
+
+  const doneBtn = el('button', { class:'btn', type:'button' }, icon('check'), 'I tried it! Show me why');
+  function lock(){ doneBtn.disabled = true; doneBtn.replaceChildren(icon('check'), 'Done!'); }
+
+  function signupHint(){
+    return !state.family
+      ? el('button', { class:'btn small', type:'button', style:'margin-top:12px', onclick:() => openAcct('signup') }, icon('user'), 'Sign up to keep your progress under your name')
+      : null;
+  }
+
+  doneBtn.addEventListener('click', () => {
+    let msg;
+    if(predicted === null) msg = 'Here is the science:';
+    else if(predicted === l.answer) msg = 'Your prediction was right. Great thinking!';
+    else msg = 'Surprise! It was not what you guessed, and that is how scientists learn.';
+
+    const before = getRank(doneCount()).cur.name;
+    markDone(l.id, predicted === null ? null : predicted === l.answer);
+    const after = getRank(doneCount()).cur.name;
+
+    why.replaceChildren(
+      el('strong', { text:msg }),
+      el('p', { text:l.why, style:'margin:6px 0 0' }),
+      after !== before ? el('div', { class:'rankup' }, icon('trophy'), 'New rank unlocked: ' + after + '!') : null,
+      signupHint()
+    );
+    why.hidden = false;
+    lock();
+    renderGrid();
+    renderLog();
+    why.scrollIntoView({ block:'nearest', behavior:'smooth' });
+  });
+
+  if(isDone(l.id)){
+    why.append(el('strong', { text:'You have already done this one. Here is the science:' }),
+               el('p', { text:l.why, style:'margin:6px 0 0' }));
+    why.hidden = false;
+    lock();
+  }
+
+  const labs = getLabs();
+  const idx = labs.findIndex(x => x.id === l.id);
+  const nextLab = labs[(idx + 1) % labs.length];
+  body.append(el('div', { class:'actions' },
+    doneBtn,
+    nextLab && nextLab.id !== l.id ? el('button', { class:'btn ghost', type:'button', onclick:() => openLab(nextLab) }, 'Next: ' + nextLab.title, icon('arrow')) : null,
+    el('button', { class:'btn ghost', type:'button', text:'Back to experiments', onclick:() => dlg.close() })
+  ));
+
+  document.title = l.title + ' | Mini Science Lab';
+  safeHistory('#lab-' + l.id);
+  if(!dlg.open) dlg.showModal();
+  dlg.scrollTop = 0;
+}
+
+dlg.addEventListener('close', () => {
+  document.title = baseTitle;
+  safeHistory(location.pathname + location.search);
+});
+$('closeBtn').addEventListener('click', () => dlg.close());
+dlg.addEventListener('click', e => { if(e.target === dlg) dlg.close(); });
+$('printBtn').addEventListener('click', () => window.print());
+
+$('shareBtn').addEventListener('click', async () => {
+  const l = currentLab;
+  if(!l) return;
+  const url = location.href.split('#')[0] + '#lab-' + l.id;
+  const data = { title:l.title + ' | Mini Science Lab', text:'Try this science experiment: ' + l.title, url };
+  if(navigator.share){
+    try { await navigator.share(data); return; }
+    catch(e){ if(e.name === 'AbortError') return; }
+  }
+  try { await navigator.clipboard.writeText(url); showStatus('Link copied!'); }
+  catch { showStatus('Copy: ' + url); }
+});
+
+function openFromHash(){
+  const m = location.hash.match(/^#lab-(.+)$/);
+  if(!m) return;
+  const l = getLabs().find(x => x.id === m[1]);
+  if(l) openLab(l);
+}
+window.addEventListener('hashchange', openFromHash);
+
+$('reset').addEventListener('click', async () => {
+  if(await confirmDlg('Clear all completed experiments for the guest profile?', 'Clear')){
+    state.guest.done = {};
+    save();
+    renderAll();
+  }
+});
+
+
+/* =========================================================
+   Account dialog: sign up, who is playing, grown-up PIN
+   ========================================================= */
+let pinFails = 0;
+let lockUntil = 0;
+
+function openAcct(view){
+  closeAllBut(acct);
+  renderAcct(view || (state.family ? 'picker' : 'signup'));
+  if(!acct.open) acct.showModal();
+}
+$('acctClose').addEventListener('click', () => acct.close());
+acct.addEventListener('click', e => { if(e.target === acct) acct.close(); });
+
+function pickFile(cb){
+  const i = el('input', { type:'file', accept:'application/json,.json' });
+  i.addEventListener('change', () => { if(i.files && i.files[0]) cb(i.files[0]); });
+  i.click();
+}
+
+async function importBackup(file){
+  let s = null;
+  try { s = sanitizeState(JSON.parse(await file.text())); } catch {}
+  if(!s || (!s.family && !s.custom.length)) return 'That file does not look like a Mini Science Lab backup.';
+  if(!(await confirmDlg('Replace everything on this device with the backup?', 'Restore'))) return '';
+  state = s;
+  save();
+  acct.close();
+  if(adm.open) adm.close();
+  renderAll();
+  toast('Backup restored');
+  return '';
+}
+
+function renderAcct(view){
+  const body = $('acctBody');
+  body.replaceChildren();
+
+  if(view === 'signup'){
+    $('acctTitle').textContent = 'Create a family account';
+    const err = el('div', { class:'err', role:'alert' });
+    const famI = el('input', { type:'text', maxlength:'30', autocomplete:'off' });
+    const kidI = el('input', { type:'text', maxlength:'20', autocomplete:'off' });
+    const pinI = el('input', { type:'password', inputmode:'numeric', maxlength:'6', autocomplete:'new-password' });
+    const pin2 = el('input', { type:'password', inputmode:'numeric', maxlength:'6', autocomplete:'new-password' });
+    const agree = el('input', { type:'checkbox' });
+    let fid = 0;
+    const field = (label, input, hint) => {
+      const id = 'su' + (++fid);
+      input.id = id;
+      return el('div', { class:'field' }, el('label', { for:id, text:label }), input, hint ? el('small', { text:hint }) : null);
+    };
+
+    const form = el('form', { novalidate:'' },
+      el('p', { class:'note', text:'Save progress for each child and unlock the grown-ups dashboard. No email or real names needed, nicknames are best.' }),
+      field('Family nickname', famI, 'For example: The Rocket Family'),
+      field('First explorer nickname', kidI, 'You can add more explorers later.'),
+      el('div', { class:'grid2' },
+        field('Grown-up PIN', pinI, '4 to 6 digits'),
+        field('Confirm PIN', pin2)),
+      el('label', { class:'agree' }, agree, el('span', { text:'I am a parent or guardian. I understand progress is saved only in this browser on this device.' })),
+      err,
+      el('button', { class:'btn', type:'submit', style:'width:100%' }, icon('check'), 'Create family account')
+    );
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const fam = famI.value.trim(), kid = kidI.value.trim();
+      if(!fam){ err.textContent = 'Add a family nickname.'; famI.focus(); return; }
+      if(!kid){ err.textContent = 'Add a nickname for the first explorer.'; kidI.focus(); return; }
+      if(!PIN_RE.test(pinI.value)){ err.textContent = 'The PIN needs 4 to 6 digits.'; pinI.focus(); return; }
+      if(pinI.value !== pin2.value){ err.textContent = 'The PINs do not match.'; pin2.focus(); return; }
+      if(!agree.checked){ err.textContent = 'Please confirm you are a parent or guardian.'; return; }
+
+      const salt = randomHex(12);
+      const hash = await hashPin(pinI.value, salt);
+      const av = AVATARS[0];
+      const k = { id:uid(), name:kid, icon:av.icon, hue:av.hue, done:{} };
+      // bring guest progress over to the first explorer
+      k.done = Object.assign({}, state.guest.done);
+      state.guest.done = {};
+      state.family = { name:fam, salt, hash };
+      state.kids = [k];
+      state.activeKid = k.id;
+      save();
+      acct.close();
+      renderAll();
+      toast('Welcome, ' + kid + '! Your family account is ready.');
+    });
+
+    const restoreMsg = el('div', { class:'err', role:'alert' });
+    body.append(form,
+      el('div', { class:'zone' },
+        el('div', { class:'row' },
+          el('span', { class:'grow note', text:'Moving from another device?' }),
+          el('button', { class:'btn ghost small', type:'button', onclick:() => pickFile(async f => { restoreMsg.textContent = await importBackup(f); }) }, 'Restore from backup')),
+        restoreMsg));
+    setTimeout(() => famI.focus(), 50);
+    return;
+  }
+
+  if(view === 'picker'){
+    $('acctTitle').textContent = "Who's playing?";
+    const who = el('div', { class:'who' });
+    state.kids.forEach(k => {
+      who.append(el('button', {
+        class:'whobtn', type:'button', 'aria-pressed':String(state.activeKid === k.id),
+        onclick:() => { state.activeKid = k.id; save(); acct.close(); renderAll(); toast('Hi, ' + k.name + '!'); }
+      }, tile(kidLook(k), 'md'), k.name));
+    });
+    who.append(el('button', {
+      class:'whobtn', type:'button', 'aria-pressed':String(!state.activeKid),
+      onclick:() => { state.activeKid = null; save(); acct.close(); renderAll(); }
+    }, tile(kidLook(null), 'md'), 'Guest'));
+    body.append(
+      el('p', { class:'note', text:'Pick your name so your experiments are saved in your own notebook.' }),
+      who,
+      el('div', { class:'zone' },
+        el('div', { class:'row' },
+          el('span', { class:'grow note', text:'Grown-ups can add experiments and see progress.' }),
+          el('button', { class:'btn small', type:'button', onclick:() => renderAcct('pin') }, icon('shield'), 'Grown-ups area')))
+    );
+    return;
+  }
+
+  if(view === 'pin'){
+    $('acctTitle').textContent = 'Grown-ups area';
+    const err = el('div', { class:'err', role:'alert' });
+    const pinI = el('input', { type:'password', inputmode:'numeric', maxlength:'6', id:'pinIn', autocomplete:'current-password' });
+    const form = el('form', { novalidate:'' },
+      el('p', { class:'note', text:'Enter your grown-up PIN to open the dashboard.' }),
+      el('div', { class:'field' }, el('label', { for:'pinIn', text:'PIN' }), pinI),
+      err,
+      el('button', { class:'btn', type:'submit', style:'width:100%' }, icon('lock'), 'Unlock')
+    );
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      if(Date.now() < lockUntil){ err.textContent = 'Too many tries. Please wait a little and try again.'; return; }
+      const f = state.family;
+      const ok = f && (await hashPin(pinI.value, f.salt)) === f.hash;
+      if(ok){ pinFails = 0; acct.close(); openAdmin(); return; }
+      pinFails++;
+      if(pinFails >= 5){ pinFails = 0; lockUntil = Date.now() + 30000; err.textContent = 'Too many tries. Wait 30 seconds.'; }
+      else err.textContent = 'That PIN is not right.';
+      pinI.value = '';
+      pinI.focus();
+    });
+    body.append(form,
+      el('div', { class:'zone' },
+        el('div', { class:'row' },
+          el('button', { class:'btn ghost small', type:'button', onclick:() => renderAcct('picker') }, 'Back'),
+          el('button', { class:'btn ghost small dangerline', type:'button', onclick:async () => {
+            if(await confirmDlg('Forgot your PIN? This erases the family profiles and progress on this device. Your own experiments are kept.', 'Erase and start over')){
+              state.family = null; state.kids = []; state.activeKid = null; state.guest = { done:{} };
+              save(); renderAll(); renderAcct('signup');
+            }
+          } }, 'I forgot my PIN'))));
+    setTimeout(() => pinI.focus(), 50);
+  }
+}
+
+
+/* =========================================================
+   Grown-ups dashboard
+   ========================================================= */
+let admTab = 'kids';
+let renamingId = null;
+let editingId = null;
+
+function openAdmin(){
+  closeAllBut(adm);
+  admTab = 'kids'; renamingId = null; editingId = null;
+  renderAdmin();
+  if(!adm.open) adm.showModal();
+}
+$('admLock').addEventListener('click', () => adm.close());
+
+let admTimer;
+function admNote(msg){
+  const s = $('admStatus');
+  s.textContent = msg;
+  clearTimeout(admTimer);
+  admTimer = setTimeout(() => { s.textContent = ''; }, 3500);
+}
+
+function renderAdmin(){
+  const tabs = [['kids', 'Explorers', 'user'], ['exp', 'Experiments', 'flask'], ['set', 'Settings', 'shield']];
+  $('admTabs').replaceChildren(...tabs.map(([id, label, ic]) =>
+    el('button', { class:'tabbtn', type:'button', role:'tab', 'aria-selected':String(admTab === id), onclick:() => { admTab = id; renderAdmin(); } }, icon(ic), label)));
+  const body = $('admBody');
+  body.setAttribute('role', 'tabpanel');
+  body.replaceChildren(admTab === 'kids' ? tabKids() : admTab === 'exp' ? tabExp() : tabSettings());
+}
+
+function refresh(){ renderAll(); renderAdmin(); }
+
+/* Explorers */
+function tabKids(){
+  const box = el('div');
+  box.append(el('h3', { text:'Explorers and their progress' }));
+  if(!state.kids.length) box.append(el('p', { class:'muted', text:'No explorers yet. Add one below.' }));
+  const total = getLabs().length;
+
+  state.kids.forEach(k => {
+    const entries = Object.entries(k.done).sort((a, b) => b[1].t - a[1].t);
+    const n = entries.length;
+    const pct = total ? Math.min(100, n / total * 100) : 0;
+    const rk = getRank(n).cur.name;
+
+    let nameNode;
+    if(renamingId === k.id){
+      const inp = el('input', { type:'text', maxlength:'20', value:k.name, 'aria-label':'Explorer nickname' });
+      nameNode = el('form', { class:'row', onsubmit:e => {
+        e.preventDefault();
+        const v = inp.value.trim();
+        if(v){ k.name = v.slice(0, 20); save(); renamingId = null; refresh(); admNote('Name updated'); }
+      } }, inp,
+        el('button', { class:'btn small', type:'submit', text:'Save' }),
+        el('button', { class:'btn ghost small', type:'button', text:'Cancel', onclick:() => { renamingId = null; renderAdmin(); } }));
+      setTimeout(() => inp.focus(), 30);
+    } else {
+      nameNode = el('div', {}, el('strong', { text:k.name }), el('small', { style:'display:block;color:var(--muted)', text:rk + ' · ' + n + ' done' }));
+    }
+
+    const chips = el('div', { class:'chips' });
+    entries.slice(0, 40).forEach(([id, v]) => {
+      const l = labById(id);
+      chips.append(el('span', { class:'chip2', text:(l ? l.title : 'Removed experiment') + ' · ' + fmtDate(v.t) + (v.r === true ? ' · predicted right' : '') }));
+    });
+    if(!n) chips.append(el('span', { class:'muted', text:'Nothing completed yet.' }));
+
+    box.append(el('div', { class:'kcard' },
+      el('div', { class:'row' },
+        tile(kidLook(k), 'md'),
+        el('div', { class:'grow' }, nameNode),
+        el('button', { class:'btn ghost small', type:'button', text:'Rename', onclick:() => { renamingId = k.id; renderAdmin(); } }),
+        el('button', { class:'btn ghost small', type:'button', text:'Reset progress', onclick:async () => {
+          if(await confirmDlg('Clear all progress for ' + k.name + '?', 'Clear progress')){ k.done = {}; save(); refresh(); admNote('Progress cleared'); }
+        } }),
+        el('button', { class:'btn ghost small dangerline', type:'button', text:'Remove', onclick:async () => {
+          if(await confirmDlg('Remove ' + k.name + ' and their progress?', 'Remove')){
+            state.kids = state.kids.filter(x => x.id !== k.id);
+            if(state.activeKid === k.id) state.activeKid = null;
+            save(); refresh(); admNote('Explorer removed');
+          }
+        } })),
+      el('div', { class:'progress', role:'progressbar', 'aria-label':k.name + ' progress', 'aria-valuemin':'0', 'aria-valuemax':'100', 'aria-valuenow':String(Math.round(pct)) }, el('div', { class:'bar', style:'width:' + pct + '%' })),
+      chips));
+  });
+
+  const err = el('div', { class:'err', role:'alert' });
+  const inp = el('input', { type:'text', maxlength:'20', id:'newKid', placeholder:'Nickname' });
+  const form = el('form', { novalidate:'', onsubmit:e => {
+    e.preventDefault();
+    const v = inp.value.trim();
+    if(!v){ err.textContent = 'Add a nickname.'; return; }
+    if(state.kids.length >= 12){ err.textContent = 'You can have up to 12 explorers.'; return; }
+    const av = AVATARS[state.kids.length % AVATARS.length];
+    state.kids.push({ id:uid(), name:v, icon:av.icon, hue:av.hue, done:{} });
+    save(); refresh(); admNote('Explorer added');
+  } },
+    el('div', { class:'row' },
+      el('div', { class:'field grow', style:'margin:0' }, el('label', { for:'newKid', text:'Add an explorer' }), inp),
+      el('button', { class:'btn', type:'submit', style:'align-self:flex-end' }, icon('plus'), 'Add')),
+    err);
+  box.append(el('div', { class:'zone' }, form));
+  return box;
+}
+
+/* Experiments */
+function tabExp(){
+  const box = el('div');
+  const ex = editingId ? state.custom.find(c => c.id === editingId) : null;
+
+  box.append(el('h3', { text:ex ? 'Edit experiment' : 'Add a new experiment' }));
+  box.append(buildForm(ex));
+
+  box.append(el('h3', { text:'Your family experiments' }));
+  if(!state.custom.length) box.append(el('p', { class:'muted', text:'You have not added any yet. They will appear for every explorer on this device.' }));
+  state.custom.forEach(l => {
+    box.append(el('div', { class:'listrow' },
+      tile(l, 'md'),
+      el('div', { class:'grow' }, el('strong', { text:l.title }), el('small', { text:l.cat + ' · ' + l.time + ' min · ' + l.level })),
+      el('button', { class:'btn ghost small', type:'button', text:'Edit', onclick:() => { editingId = l.id; renderAdmin(); $('admBody').scrollIntoView(); adm.scrollTop = 0; } }),
+      el('button', { class:'btn ghost small dangerline', type:'button', text:'Delete', onclick:async () => {
+        if(await confirmDlg('Delete "' + l.title + '"?', 'Delete')){
+          state.custom = state.custom.filter(c => c.id !== l.id);
+          if(editingId === l.id) editingId = null;
+          save(); refresh(); admNote('Experiment deleted');
+        }
+      } })));
+  });
+
+  box.append(el('h3', { text:'Built-in experiments' }));
+  box.append(el('p', { class:'note', text:'Hide any experiment that is not right for your explorers.' }));
+  builtIn.forEach(l => {
+    const hid = state.hidden.includes(l.id);
+    box.append(el('div', { class:'listrow' },
+      tile(l, 'md'),
+      el('div', { class:'grow' }, el('strong', { text:l.title }), el('small', { text:l.cat + ' · ' + l.time + ' min' + (hid ? ' · hidden' : '') })),
+      el('button', { class:'btn ghost small', type:'button', 'aria-pressed':String(hid), text:hid ? 'Show' : 'Hide', onclick:() => {
+        state.hidden = hid ? state.hidden.filter(x => x !== l.id) : state.hidden.concat(l.id);
+        save(); refresh();
+      } })));
+  });
+  return box;
+}
+
+let _fid = 0;
+function field(label, input, hint){
+  const id = 'ff' + (++_fid);
+  input.id = id;
+  return el('div', { class:'field' }, el('label', { for:id, text:label }), input, hint ? el('small', { text:hint }) : null);
+}
+function selectEl(name, values, cur){
+  const s = el('select', { name });
+  values.forEach(v => { const o = el('option', { value:v, text:v }); if(v === cur) o.selected = true; s.append(o); });
+  return s;
+}
+
+function buildForm(ex){
+  const err = el('div', { class:'err', role:'alert' });
+  const T = (name, val, max) => el('input', { type:'text', name, maxlength:String(max), value:val || '' });
+  const A = (name, val, rows) => el('textarea', { name, rows:String(rows || 4), text:val || '' });
+
+  const iconPick = el('div', { class:'picks', role:'radiogroup', 'aria-label':'Icon' });
+  ICONS.forEach(n => {
+    const r = el('input', { type:'radio', name:'icon', value:n, class:'vh', 'aria-label':'Icon ' + n });
+    if(n === (ex ? ex.icon : 'flask')) r.checked = true;
+    iconPick.append(el('label', { class:'pick' }, r, tile({ icon:n, hue:ex ? ex.hue : 260 }, 'md')));
+  });
+  const huePick = el('div', { class:'picks', role:'radiogroup', 'aria-label':'Color' });
+  const curHue = ex ? ex.hue : 260;
+  const hues = HUES.includes(curHue) ? HUES : [curHue].concat(HUES);
+  hues.forEach(h => {
+    const r = el('input', { type:'radio', name:'hue', value:String(h), class:'vh', 'aria-label':'Color ' + h });
+    if(h === curHue) r.checked = true;
+    huePick.append(el('label', { class:'pick' }, r, el('span', { class:'sw', style:'background:hsl(' + h + ' 75% 55%)' })));
+  });
+
+  const optRows = [0, 1, 2].map(i => {
+    const t = el('input', { type:'text', name:'opt' + i, maxlength:'150', value:ex ? ex.options[i] : '', 'aria-label':'Answer option ' + (i + 1), placeholder:'Answer option ' + (i + 1) });
+    const r = el('input', { type:'radio', name:'correct', value:String(i) });
+    if((ex ? ex.answer : 0) === i) r.checked = true;
+    return el('div', { class:'optrow' }, t, el('label', { class:'corr' }, r, 'Correct'));
+  });
+
+  const form = el('form', { novalidate:'' },
+    field('Title', T('title', ex && ex.title, 60)),
+    field('Short description', T('blurb', ex && ex.blurb, 160), 'One sentence shown on the experiment card.'),
+    el('div', { class:'grid2' },
+      field('Subject', selectEl('cat', CATS, ex ? ex.cat : 'Chemistry')),
+      field('Level', selectEl('level', LEVELS, ex ? ex.level : 'Easy'))),
+    el('div', { class:'grid2' },
+      field('Time in minutes', el('input', { type:'number', name:'time', min:'1', max:'240', value:String(ex ? ex.time : 10) })),
+      field('How messy?', selectEl('mess', MESS, ex ? ex.mess : 'Not messy'))),
+    el('div', { class:'field' }, el('span', { class:'lbl', text:'Icon' }), iconPick),
+    el('div', { class:'field' }, el('span', { class:'lbl', text:'Color' }), huePick),
+    field('Grown-up safety note', T('adult', ex && ex.adult, 300), 'For example: Use warm water, not hot.'),
+    field('Materials', A('materials', ex && ex.materials.join('\n'), 4), 'One item per line.'),
+    field('Steps', A('steps', ex && ex.steps.join('\n'), 5), 'One step per line.'),
+    field('Prediction question', T('question', ex && ex.question, 200)),
+    el('div', { class:'field' }, el('span', { class:'lbl', text:'Three answer options (mark the correct one)' }), ...optRows),
+    field('Why does it happen?', A('why', ex && ex.why, 3), 'A short, kid-friendly explanation.'),
+    err,
+    el('div', { class:'row' },
+      el('button', { class:'btn', type:'submit' }, icon(ex ? 'check' : 'plus'), ex ? 'Save changes' : 'Add experiment'),
+      ex ? el('button', { class:'btn ghost', type:'button', text:'Cancel', onclick:() => { editingId = null; renderAdmin(); } }) : null)
+  );
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const lines = k => String(fd.get(k) || '').split('\n').map(x => x.trim()).filter(Boolean);
+    const raw = {
+      id:ex ? ex.id : 'c-' + uid(),
+      title:fd.get('title'), blurb:fd.get('blurb'), cat:fd.get('cat'), level:fd.get('level'),
+      time:fd.get('time'), mess:fd.get('mess'), icon:fd.get('icon'), hue:fd.get('hue'),
+      adult:fd.get('adult'), materials:lines('materials'), steps:lines('steps'),
+      question:fd.get('question'),
+      options:[0, 1, 2].map(i => String(fd.get('opt' + i) || '').trim()),
+      answer:parseInt(fd.get('correct'), 10),
+      why:fd.get('why')
+    };
+    if(!String(raw.title).trim()){ err.textContent = 'Add a title.'; return; }
+    if(!raw.materials.length){ err.textContent = 'List at least one material.'; return; }
+    if(!raw.steps.length){ err.textContent = 'Add at least one step.'; return; }
+    if(!String(raw.question).trim()){ err.textContent = 'Add a prediction question.'; return; }
+    if(raw.options.some(o => !o)){ err.textContent = 'Fill in all three answer options.'; return; }
+    if(!String(raw.why).trim()){ err.textContent = 'Add a short explanation of why it happens.'; return; }
+
+    const clean = sanitizeLab(raw);
+    if(!clean){ err.textContent = 'Something looks wrong. Please check the fields.'; return; }
+
+    if(ex){
+      state.custom = state.custom.map(c => c.id === ex.id ? clean : c);
+    } else {
+      if(state.custom.length >= 50){ err.textContent = 'You can add up to 50 experiments.'; return; }
+      state.custom.push(clean);
+    }
+    editingId = null;
+    save();
+    refresh();
+    admNote(ex ? 'Experiment updated' : 'Experiment added');
+  });
+  return form;
+}
+
+/* Settings */
+function tabSettings(){
+  const box = el('div');
+
+  // family name
+  {
+    const inp = el('input', { type:'text', maxlength:'30', value:state.family ? state.family.name : '' });
+    const err = el('div', { class:'err', role:'alert' });
+    const f = el('form', { novalidate:'', onsubmit:e => {
+      e.preventDefault();
+      const v = inp.value.trim();
+      if(!v){ err.textContent = 'Add a family nickname.'; return; }
+      state.family.name = v; save(); err.textContent = ''; admNote('Saved');
+    } },
+      field('Family nickname', inp),
+      err,
+      el('button', { class:'btn small', type:'submit', text:'Save' }));
+    box.append(el('div', { class:'zone' }, el('h3', { text:'Family' }), f));
+  }
+
+  // PIN
+  {
+    const a = el('input', { type:'password', inputmode:'numeric', maxlength:'6', autocomplete:'new-password' });
+    const b = el('input', { type:'password', inputmode:'numeric', maxlength:'6', autocomplete:'new-password' });
+    const err = el('div', { class:'err', role:'alert' });
+    const f = el('form', { novalidate:'', onsubmit:async e => {
+      e.preventDefault();
+      if(!PIN_RE.test(a.value)){ err.textContent = 'The PIN needs 4 to 6 digits.'; return; }
+      if(a.value !== b.value){ err.textContent = 'The PINs do not match.'; return; }
+      const salt = randomHex(12);
+      state.family.salt = salt;
+      state.family.hash = await hashPin(a.value, salt);
+      save(); a.value = ''; b.value = ''; err.textContent = ''; admNote('PIN changed');
+    } },
+      el('div', { class:'grid2' }, field('New PIN', a, '4 to 6 digits'), field('Confirm new PIN', b)),
+      err,
+      el('button', { class:'btn small', type:'submit', text:'Change PIN' }));
+    box.append(el('div', { class:'zone' }, el('h3', { text:'Grown-up PIN' }),
+      el('p', { class:'note', text:'The PIN keeps children out of this dashboard. Because everything is stored in this browser, it is a family lock rather than strong security.' }),
+      f));
+  }
+
+  // backup
+  {
+    const msg = el('div', { class:'err', role:'alert' });
+    box.append(el('div', { class:'zone' },
+      el('h3', { text:'Backup and restore' }),
+      el('p', { class:'note', text:'Download a backup to keep your family, progress and experiments safe, or to move to another device. Keep the file private, it contains your PIN lock.' }),
+      el('div', { class:'row' },
+        el('button', { class:'btn small', type:'button', onclick:() => {
+          try {
+            const blob = new Blob([JSON.stringify(state, null, 2)], { type:'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = el('a', { href:url, download:'mini-science-lab-backup.json' });
+            document.body.append(a); a.click(); a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+            admNote('Backup downloaded');
+          } catch { msg.textContent = 'Could not create the backup in this browser.'; }
+        } }, icon('share'), 'Download backup'),
+        el('button', { class:'btn ghost small', type:'button', onclick:() => pickFile(async f => { msg.textContent = await importBackup(f); }) }, 'Restore from backup')),
+      msg));
+  }
+
+  // danger
+  box.append(el('div', { class:'zone' },
+    el('h3', { text:'Delete everything' }),
+    el('p', { class:'note', text:'Removes the family account, all explorers, progress and your own experiments from this device.' }),
+    el('button', { class:'btn danger small', type:'button', text:'Delete all data', onclick:async () => {
+      if(await confirmDlg('Delete the family account, all progress and your own experiments from this device? This cannot be undone.', 'Delete everything')){
+        state = defaultState(); save(); adm.close(); renderAll(); toast('All data deleted');
+      }
+    } })));
+  return box;
+}
+
+
+/* =========================================================
+   Start
+   ========================================================= */
+renderAll();
+openFromHash();
+
+
+/* ===== ULTRA MODE — interaction polish ===== */
+(function ultraMode(){
+  document.documentElement.classList.add('ultra-mode');
+  const style=document.createElement('style');
+  style.textContent=`
+    .cursor-orb{position:fixed;left:0;top:0;width:260px;height:260px;border-radius:50%;pointer-events:none;z-index:999;transform:translate(-50%,-50%);background:radial-gradient(circle,#8d7cff18,transparent 68%);filter:blur(4px);mix-blend-mode:screen;transition:opacity .3s}
+    .xp-pop{position:fixed;pointer-events:none;z-index:1000;font-weight:1000;color:var(--orange);font-size:1.2rem;animation:xpFloat 1s ease forwards;text-shadow:0 4px 18px #0004}
+    @keyframes xpFloat{0%{opacity:0;transform:translate(-50%,0) scale(.7)}20%{opacity:1}100%{opacity:0;transform:translate(-50%,-80px) scale(1.15)}}
+    .spark{position:fixed;pointer-events:none;z-index:998;width:5px;height:5px;border-radius:50%;background:var(--accent);animation:spark .7s ease-out forwards}
+    @keyframes spark{to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0)}}
+    .card,.feat,.how,.rank,.daily{will-change:transform}
+  `;document.head.append(style);
+  const orb=document.createElement('div');orb.className='cursor-orb';document.body.append(orb);
+  let mx=-999,my=-999,tx=mx,ty=my;
+  addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY});
+  function move(){mx+=(tx-mx)*.16;my+=(ty-my)*.16;orb.style.left=mx+'px';orb.style.top=my+'px';requestAnimationFrame(move)} move();
+  addEventListener('pointerdown',e=>{
+    for(let i=0;i<7;i++){const s=document.createElement('i');s.className='spark';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';s.style.setProperty('--dx',(Math.random()*100-50)+'px');s.style.setProperty('--dy',(Math.random()*100-50)+'px');document.body.append(s);setTimeout(()=>s.remove(),750)}
+  });
+  const oldMark=window.markDone;
+  if(oldMark){window.markDone=function(id,right){oldMark(id,right);showXP(right?'+100 XP':'+60 XP');};}
+  function showXP(msg){const e=document.createElement('div');e.className='xp-pop';e.textContent=msg;e.style.left='50%';e.style.top='52%';document.body.append(e);setTimeout(()=>e.remove(),1000)}
+  // Add subtle 3D tilt to cards without interfering with buttons.
+  document.addEventListener('pointermove',e=>{const c=e.target.closest?.('.card');if(!c)return;const r=c.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`translateY(-9px) perspective(700px) rotateX(${(-y*2.2).toFixed(2)}deg) rotateY(${(x*2.2).toFixed(2)}deg)`});
+  document.addEventListener('pointerleave',e=>{const c=e.target.closest?.('.card');if(c)c.style.transform=''},true);
+  // Keyboard shortcut: / focuses experiment search.
+  addEventListener('keydown',e=>{if(e.key==='/'&&!/input|textarea|select/i.test(document.activeElement.tagName)){e.preventDefault();$('q')?.focus()}});
+})();
+
+
+  // Light / dark mode toggle
+  (function themeToggle(){
+    const btn=document.getElementById('themeToggle');
+    if(!btn) return;
+    const root=document.documentElement;
+    function syncTheme(){
+      const dark=root.dataset.theme==='dark';
+      btn.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');
+      btn.title=dark?'Switch to light mode':'Switch to dark mode';
+      const label=btn.querySelector('.theme-label');
+      if(label) label.textContent=dark?'Light mode':'Dark mode';
+    }
+    btn.addEventListener('click',()=>{
+      const next=root.dataset.theme==='dark'?'light':'dark';
+      root.dataset.theme=next;
+      try{localStorage.setItem('minilab-theme',next)}catch(e){}
+      syncTheme();
+    });
+    syncTheme();
+  })();
+</script>
+</body>
+</html>
